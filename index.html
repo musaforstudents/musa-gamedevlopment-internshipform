@@ -7,71 +7,104 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
+      background: #f5f5f5;
+      margin: 0;
       padding: 20px;
+      color: #333;
     }
+
     .container {
-      max-width: 750px;
+      max-width: 700px;
       margin: auto;
-      background: white;
-      padding: 30px;
+      background: #fff;
+      padding: 30px 40px;
       border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 120px;
+    }
+
     h2 {
-      color: #222;
       text-align: center;
-      margin-bottom: 20px;
+      color: #222;
+      margin-bottom: 25px;
     }
+
     label {
-      font-weight: bold;
+      font-weight: 600;
       display: block;
       margin-top: 15px;
+      margin-bottom: 6px;
     }
+
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 6px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      font-size: 15px;
+      background-color: #fff;
+      color: #333;
     }
+
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 8px;
+    }
+
     .checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
+      margin-top: 5px;
     }
+
     .checkbox-group label {
       font-weight: normal;
     }
+
     button {
-      margin-top: 20px;
-      background-color: #007bff;
+      margin-top: 25px;
+      background-color: #007BFF;
       color: white;
       padding: 12px 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 4px;
       font-size: 16px;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #0056b3;
+    }
+
+    @media (max-width: 600px) {
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
+  <img class="logo" src="https://i.postimg.cc/JnT9TXTV/musa.png" alt="MUSA Logo" />
   <h2>MUSA Internship Application Form</h2>
-  <form method="POST" action="YOUR_BACKEND_HANDLER_URL">
+
+  <form id="internForm">
     
     <label>Full Name*</label>
-    <input type="text" name="full_name" required>
+    <input type="text" name="full_name" required placeholder="Your full name">
 
     <label>Email ID*</label>
-    <input type="email" name="email" required>
+    <input type="email" name="email" required placeholder="you@example.com">
 
     <label>Phone Number*</label>
-    <input type="tel" name="phone" required>
+    <input type="tel" name="phone" required placeholder="1234567890">
 
     <label>College Name*</label>
     <input type="text" name="college" required>
@@ -107,10 +140,10 @@
     </div>
 
     <label>Briefly describe your experience or interest in the role:</label>
-    <textarea name="experience" rows="4"></textarea>
+    <textarea name="experience" rows="4" placeholder="Write your experience or passion here..."></textarea>
 
     <label>Portfolio / GitHub / Past Work Links:</label>
-    <input type="url" name="portfolio">
+    <input type="url" name="portfolio" placeholder="https://yourportfolio.com">
 
     <label>Software or tools you’re comfortable with:</label>
     <input type="text" name="tools">
@@ -144,7 +177,6 @@
     e.preventDefault();
     
     const form = e.target;
-    
     const roles = Array.from(form.querySelectorAll("input[name='role[]']:checked")).map(r => r.value).join(", ");
 
     const formData = {
@@ -177,8 +209,6 @@
     });
   });
 </script>
-
-
 
 </body>
 </html>
