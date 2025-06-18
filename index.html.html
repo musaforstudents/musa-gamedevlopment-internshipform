@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MUSA Internship Application Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 750px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #222;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .checkbox-group label {
+      font-weight: normal;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>MUSA Internship Application Form</h2>
+  <form method="POST" action="YOUR_BACKEND_HANDLER_URL">
+    
+    <label>Full Name*</label>
+    <input type="text" name="full_name" required>
+
+    <label>Email ID*</label>
+    <input type="email" name="email" required>
+
+    <label>Phone Number*</label>
+    <input type="tel" name="phone" required>
+
+    <label>College Name*</label>
+    <input type="text" name="college" required>
+
+    <label>Branch / Department*</label>
+    <input type="text" name="branch" required>
+
+    <label>Year of Study*</label>
+    <select name="year" required>
+      <option value="">Select Year</option>
+      <option>FY</option>
+      <option>SY</option>
+      <option>TY</option>
+      <option>Final Year</option>
+      <option>Other</option>
+    </select>
+
+    <label>Which role are you applying for?*</label>
+    <div class="checkbox-group">
+      <label><input type="checkbox" name="role[]" value="Unity Developer"> Unity Game Developer</label>
+      <label><input type="checkbox" name="role[]" value="3D Modeler"> 3D Modeler</label>
+      <label><input type="checkbox" name="role[]" value="Environment Designer"> Environment Designer</label>
+      <label><input type="checkbox" name="role[]" value="Animator"> Animator</label>
+      <label><input type="checkbox" name="role[]" value="Sound Editor"> Sound/Voice Editor</label>
+      <label><input type="checkbox" name="role[]" value="Voice Artist"> Voice Artist</label>
+      <label><input type="checkbox" name="role[]" value="UI/UX"> UI/UX Designer</label>
+      <label><input type="checkbox" name="role[]" value="App Developer"> App Developer</label>
+      <label><input type="checkbox" name="role[]" value="Backend Developer"> Backend Developer</label>
+      <label><input type="checkbox" name="role[]" value="QA Tester"> QA Tester</label>
+      <label><input type="checkbox" name="role[]" value="Game Designer"> Game Designer</label>
+      <label><input type="checkbox" name="role[]" value="Marketing"> Social Media / Marketing</label>
+      <label><input type="checkbox" name="role[]" value="Other"> Other</label>
+    </div>
+
+    <label>Briefly describe your experience or interest in the role:</label>
+    <textarea name="experience" rows="4"></textarea>
+
+    <label>Portfolio / GitHub / Past Work Links:</label>
+    <input type="url" name="portfolio">
+
+    <label>Software or tools you’re comfortable with:</label>
+    <input type="text" name="tools">
+
+    <label>Weekly Availability*</label>
+    <select name="availability" required>
+      <option value="">Select</option>
+      <option>Less than 5 hrs</option>
+      <option>5–10 hrs</option>
+      <option>10–20 hrs</option>
+      <option>Full-time (Vacation)</option>
+    </select>
+
+    <label>Weekend Availability*</label>
+    <select name="weekend" required>
+      <option value="">Select</option>
+      <option>Yes</option>
+      <option>No</option>
+      <option>Occasionally</option>
+    </select>
+
+    <label>What excites you most about this project?</label>
+    <textarea name="motivation" rows="4"></textarea>
+
+    <button type="submit">Submit Application</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("internForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    
+    const roles = Array.from(form.querySelectorAll("input[name='role[]']:checked")).map(r => r.value).join(", ");
+
+    const formData = {
+      full_name: form.full_name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      college: form.college.value,
+      branch: form.branch.value,
+      year: form.year.value,
+      roles: roles,
+      experience: form.experience.value,
+      portfolio: form.portfolio.value,
+      tools: form.tools.value,
+      availability: form.availability.value,
+      weekend: form.weekend.value,
+      motivation: form.motivation.value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbztSCQ5IUuku7aq7ymsulLDOexD0afwajbo3n-GY9DGVb7aRCik_kgQHBnOhYYAg3fX/exec", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" }
+    }).then(response => {
+      if (response.ok) {
+        alert("Application submitted successfully!");
+        form.reset();
+      } else {
+        alert("Submission failed. Try again later.");
+      }
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
